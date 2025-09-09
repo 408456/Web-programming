@@ -1,3 +1,25 @@
-h4 {
-    color: aqua;
+.container {
+  width: 600px;          /* ширина контейнера */
+  min-height: 600px;      /* минимальная высота */
+  background-image: url('kramer.jpg');
+  background-size: cover;       /* картинка растягивается на весь контейнер */
+  background-position: center;  /* центрируем картинку */
+  background-repeat: no-repeat;
+  padding: 20px;         /* отступы внутри контейнера */
+  /* элементы остаются в обычном потоке */
+}
+
+/* Если нужно слегка затемнить фон, не затрагивая текст */
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255,255,255,0.5);
+  z-index: 0;
+}
+
+.container > * {
+  position: relative; /* чтобы элементы были над затемнением */
+  z-index: 1;
 }
