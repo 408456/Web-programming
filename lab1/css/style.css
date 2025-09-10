@@ -22,19 +22,55 @@ body{
     background-color: rgb(231, 231, 231);
 }
 
+/* Кнопки */
+.btn {
+    color: white;
+    background-color: rgba(109, 172, 255, 0.896);
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    border-radius: 0;
+    outline: 1px solid transparent;
+    transition: background-color .3s, outline-color .3s;
+}
+
+.btn:hover{
+    background-color: rgba(255, 229, 229, 0.896);
+}
+.btn:active{
+    background-color: rgba(205, 176, 176, 0.896);
+}
+.btn:focus{
+    outline-color:  rgba(130, 55, 55, 0.896);
+}
+
 /* Шапка страницы*/
 .container{
     max-width: 1200px;
-    padding: 0 15px;
+    padding: 0 20px;
     margin: 0 auto;
+    margin-bottom: 20px;
 
 }
 .header{
+    padding: 10px 0;
     background-color: white;
 }
-
+/* Навигация */
 .navigation{
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
+}
+
+/* Сброс стилей */
+.list-reset{
+    list-style-type: none;
+    padding: none;
+    margin: none;
+}
+
+/* Контейнер для страницы */
+.page-container{
+    background-color: white;
 }

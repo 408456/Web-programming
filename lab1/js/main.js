@@ -32,5 +32,61 @@ function getHeader() {
 }
 
 
+function getPageContainer (){
+    const main = document.createElement("main")
+    main.classList.add("page-container")
+    return main
+
+}
+
+// Создание заголовка 
+function getMainTitle (text) {
+    const title = document.createElement("h1")
+    title.classList.add("main-title")
+    title.textContent = text
+    return title
+
+}
+
+function getProductCard(title, price) {
+    const item = document.createElement("li")
+    item.classList.add("product-list_item")
+
+    const productTitle = document.createElement("h2")
+    productTitle.classList.add("product-list_title")
+    productTitle.textContent = title
+
+    const productPrice = document.createElement("strong")
+    productPrice.classList.add("product-list_price")
+    productPrice.textContent = `${price} руб`
+
+    item.append(productTitle, productPrice)
+    return item
+}
+
+function getMainPage() {
+    const page = document.createElement("div")
+    page.classList.add("page", "main-page", "container")
+
+    const title = getMainTitle("Главная страница")
+    const list = document.createElement("ul")
+    list.classList.add("product-list", "list-reset")
+
+    // добавляем товары здесь, а не внутри getProductCard
+    list.append(
+        getProductCard("Товар 1", 5400),
+        getProductCard("Товар 2", 3200),
+        getProductCard("Товар 3", 9100),
+        getProductCard("Товар 4", 12000),
+    )
+
+    page.append(title, list)
+    return page
+}
+
+
 const header = getHeader()
-app.append(header)
+const main = getPageContainer()
+const page = getMainPage()
+main.append(page)
+app.append(header, main)
