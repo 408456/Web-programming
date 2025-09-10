@@ -60,7 +60,11 @@ function getProductCard(title, price) {
     productPrice.classList.add("product-list_price")
     productPrice.textContent = `${price} руб`
 
-    item.append(productTitle, productPrice)
+    const addBasket = document.createElement("button")
+    addBasket.classList.add("btn")
+    addBasket.textContent = "В корзину"
+
+    item.append(productTitle, productPrice, addBasket)
     return item
 }
 
@@ -77,7 +81,7 @@ function getMainPage() {
         getProductCard("Товар 1", 5400),
         getProductCard("Товар 2", 3200),
         getProductCard("Товар 3", 9100),
-        getProductCard("Товар 4", 12000),
+        getProductCard("Товар 4", 12000)
     )
 
     page.append(title, list)

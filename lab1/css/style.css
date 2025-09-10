@@ -19,7 +19,7 @@ img {
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(52, 52, 52);
 }
 
 /* Кнопки */
@@ -73,4 +73,48 @@ body{
 /* Контейнер для страницы */
 .page-container{
     background-color: white;
+}
+
+/* Страница */
+.page{
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+/* Главный заголовок */
+.main-title{
+    margin-top: 0;
+    margin-bottom: 20px;
+
+}
+
+/* Список товаров */
+.product-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+/* Карточка товара */
+.product-list_item {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid gray;
+    padding: 20px;
+
+}
+
+.product-list_title{
+    margin-top: 0;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.product-list_price{
+    margin-top: 0;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
