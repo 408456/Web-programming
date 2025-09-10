@@ -1,15 +1,12 @@
 .container {
-  width: 600px;          /* ширина контейнера */
-  min-height: 600px;      /* минимальная высота */
+  width: 600px;          
+  min-height: 600px;      
   background-image: url('kramer.jpg');
-  background-size: cover;       /* картинка растягивается на весь контейнер */
-  background-position: center;  /* центрируем картинку */
+  background-size: cover;      
+  background-position: center;  
   background-repeat: no-repeat;
-  padding: 20px;         /* отступы внутри контейнера */
-  /* элементы остаются в обычном потоке */
+  padding: 20px;         
 }
-
-/* Если нужно слегка затемнить фон, не затрагивая текст */
 .container::before {
   content: "";
   position: absolute;
@@ -18,8 +15,7 @@
   background: rgba(255,255,255,0.5);
   z-index: 0;
 }
-
 .container > * {
-  position: relative; /* чтобы элементы были над затемнением */
+  position: relative; 
   z-index: 1;
 }
