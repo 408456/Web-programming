@@ -9,11 +9,12 @@ export function getMainPage() {
     const list = document.createElement("ul")
     list.classList.add("product-list", "list-reset")
 
+    // Товары с картинками
     list.append(
-        getProductCard("Товар 1", 5400),
-        getProductCard("Товар 2", 3200),
-        getProductCard("Товар 3", 9100),
-        getProductCard("Товар 4", 12000)
+        getProductCard("Fender Stratocaster", 5400, "./img/farida.jpg"),
+        getProductCard("Fender Stratocaster", 5400, "./img/farida.jpg"),
+        getProductCard("Fender Stratocaster", 5400, "./img/farida.jpg"),
+        getProductCard("Fender Stratocaster", 5400, "./img/farida.jpg")
     )
 
     page.append(title, list)

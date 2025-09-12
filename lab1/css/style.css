@@ -19,13 +19,13 @@ img {
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(52, 52, 52);
+    background-color: rgb(255, 255, 255);
 }
 
 /* Кнопки */
 .btn {
-    color: white;
-    background-color: rgba(109, 172, 255, 0.896);
+    color: rgb(7, 7, 7);
+    background-color: white(0, 0, 0, 0.896);
     padding: 15px 20px;
     border: none;
     outline: none;
@@ -35,13 +35,13 @@ body{
 }
 
 .btn:hover{
-    background-color: rgba(255, 229, 229, 0.896);
+    background-color: rgba(198, 198, 198, 0.896);
 }
 .btn:active{
-    background-color: rgba(205, 176, 176, 0.896);
+    background-color: rgba(113, 113, 113, 0.896);
 }
 .btn:focus{
-    outline-color:  rgba(130, 55, 55, 0.896);
+    outline-color:  rgba(205, 205, 205, 0.896);
 }
 
 /* Шапка страницы*/
@@ -87,6 +87,7 @@ body{
 .main-title{
     margin-top: 0;
     margin-bottom: 20px;
+    color: rgb(21, 21, 21);
 
 }
 
@@ -100,9 +101,10 @@ body{
 
 /* Карточка товара */
 .product-list_item {
+    background-color: black;
     display: flex;
     flex-direction: column;
-    border: 2px solid gray;
+    border: 2px solid rgb(164, 164, 164);
     padding: 20px;
 
 }
@@ -111,15 +113,58 @@ body{
     margin-top: 0;
     font-size: 26px;
     margin-bottom: 10px;
+    color: white;
 }
 
 .product-list_price{
     margin-top: 0;
     font-size: 20px;
     margin-bottom: 10px;
+    color: white;
 }
 
 .desc{
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.product-list_item, .basket-item {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: #f9f9f9;
+    width: 300px;
+}
+
+.product-img, .basket-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.basket-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.basket-title {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.basket-total {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }

@@ -1,4 +1,5 @@
-import {navigation} from "../main.js"
+import { navigation } from "../main.js"
+
 export function getHeader() {
     const header = document.createElement("header")
     header.classList.add("header")
@@ -9,35 +10,29 @@ export function getHeader() {
     const nav = document.createElement("nav")
     nav.classList.add("navigation")
 
-    let link1 = document.createElement("a")
-    link1.href= ""
-    link1.classList.add("btn")
-    link1.textContent="Корзина"
+    const links = [
+        { text: "Главная страница", page: "" },
+        { text: "Каталог", page: "catalog" },
+        { text: "Корзина", page: "basket" },
+    ]
 
-    link1.addEventListener("click", function(event){
-        event.preventDefault()
-        navigation("basket")
+    links.forEach(linkData => {
+        const link = document.createElement("a")
+        link.href = `#${linkData.page}` // ставим hash
+        link.classList.add("btn")
+        link.textContent = linkData.text
+
+        link.addEventListener("click", (event) => {
+            event.preventDefault()
+            // обновляем hash
+            window.location.hash = linkData.page
+            navigation(linkData.page)
+        })
+
+        nav.append(link)
     })
 
-    let link2 = document.createElement("a")
-    link2.href= ""
-    link2.classList.add("btn")
-    link2.textContent="Каталог"
-    link2.addEventListener("click", function(event){
-        event.preventDefault()
-        navigation("catalog")
-    })
 
-    let link3 = document.createElement("a")
-    link3.href= ""
-    link3.classList.add("btn")
-    link3.textContent="Главная страница"
-        link3.addEventListener("click", function(event){
-        event.preventDefault()
-        navigation("")
-    })
-
-    nav.append(link1, link2, link3)
     container.append(nav)
     header.append(container)
     return header
