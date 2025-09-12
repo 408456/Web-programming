@@ -8,26 +8,40 @@ function getHeader() {
     const container = document.createElement("div")
     container.classList.add("container", "header_container")
 
-
     const nav = document.createElement("nav")
     nav.classList.add("navigation")
-
 
     let link1 = document.createElement("a")
     link1.href= ""
     link1.classList.add("btn")
     link1.textContent="Корзина"
 
+    link1.addEventListener("click", function(event){
+        event.preventDefault()
+        navigation("basket")
+    })
+
     let link2 = document.createElement("a")
     link2.href= ""
     link2.classList.add("btn")
     link2.textContent="Каталог"
+    link2.addEventListener("click", function(event){
+        event.preventDefault()
+        navigation("catalog")
+    })
 
-    nav.append(link1, link2)
+    let link3 = document.createElement("a")
+    link3.href= ""
+    link3.classList.add("btn")
+    link3.textContent="Главная страница"
+        link3.addEventListener("click", function(event){
+        event.preventDefault()
+        navigation("")
+    })
+
+    nav.append(link1, link2, link3)
     container.append(nav)
     header.append(container)
-
-
     return header
 }
 
@@ -45,6 +59,15 @@ function getMainTitle (text) {
     title.classList.add("main-title")
     title.textContent = text
     return title
+
+}
+
+// Создание описание продукта 
+function getProductDescription (text) {
+    const desc = document.createElement("p")
+    desc.classList.add("desc")
+    desc.textContent = text
+    return desc
 
 }
 
@@ -89,8 +112,64 @@ function getMainPage() {
 }
 
 
+// Страница товара 
+function getProductPage() {
+    const page = document.createElement("div")
+    page.classList.add("page", "product-page", "container")
+
+    const title = getMainTitle("Продукт")
+    const desc = getProductDescription("Страница в разработке")
+
+    page.append(title, desc)
+    return page
+}
+
+// Страница каталога 
+function getCatalogPage() {
+    const page = document.createElement("div")
+    page.classList.add("page", "catalog-page", "container")
+
+    const title = getMainTitle("Каталог")
+    const desc = getProductDescription("Страница в разработке")
+
+    page.append(title, desc)
+    return page
+}
+
+// Страница корзины  
+function getBasketPage() {
+    const page = document.createElement("div")
+    page.classList.add("page", "basket-page", "container")
+
+    const title = getMainTitle("Корзина")
+    const desc = getProductDescription("Страница в разработке")
+
+    page.append(title, desc)
+    return page
+}
 const header = getHeader()
-const main = getPageContainer()
-const page = getMainPage()
-main.append(page)
-app.append(header, main)
+const pageContainer = getPageContainer()
+
+function navigation(page) {
+    pageContainer.innerHTML = ""
+    console.log(page)
+
+    switch (page) {
+        case "catalog":
+            const catalogePage = getCatalogPage()
+            pageContainer.append(catalogePage)
+            break
+        case "basket":
+            const basketPage = getBasketPage()
+            pageContainet.append(basketPage)
+            break
+        default:
+            const mainPage = getMainPage()
+            pageContainer.append(mainPage)
+            break
+    }
+
+}
+navigation()
+
+app.append(header, pageContainer)
