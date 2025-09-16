@@ -44,7 +44,7 @@ export function getProductPage(product) {
         else basket.push({...product, qty: 1});
         localStorage.setItem("basket", JSON.stringify(basket));
         updateCartUI();
-        addBtn.src = "./icons/added.png"; // меняем картинку на added
+        addBtn.src = "./icons/added.png"; 
     });
 
     info.append(desc, video);
