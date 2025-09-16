@@ -1,15 +1,17 @@
-import { updateCartUI } from "../components/counter.js";
+import { updateCartUI } from "./counter.js";
 
-export function getProductCard(id, title, price, imgUrl) {
+export function getProductCard(product) {
+    const { id, title, price, imgUrl } = product;
+
     const item = document.createElement("li");
     item.classList.add("product-list_item");
     item.style.position = "relative";
+
     const image = document.createElement("img");
     image.src = imgUrl;
     image.alt = title;
-    image.classList.add("product-img", "product-img-fixed");
+    image.classList.add("product-img");
 
-    // Заголовок и цена
     const productTitle = document.createElement("h2");
     productTitle.classList.add("product-list_title");
     productTitle.textContent = title;
@@ -18,45 +20,44 @@ export function getProductCard(id, title, price, imgUrl) {
     productPrice.classList.add("product-list_price");
     productPrice.textContent = `${price} руб`;
 
-    // Кнопка добавить в корзину (слева сверху)
-    const addBasket = document.createElement("img");
-    addBasket.src = "./icons/add.png";
-    addBasket.alt = "Добавить в корзину";
-    addBasket.classList.add("icon-btn");
-    addBasket.style.position = "absolute";
-    addBasket.style.top = "10px";
-    addBasket.style.left = "10px";
+    // ADD кнопка
+    const addBtn = document.createElement("img");
+    addBtn.src = "./icons/add.png";
+    addBtn.alt = "Добавить в корзину";
+    addBtn.classList.add("icon-btn");
+    addBtn.style.position = "absolute";
+    addBtn.style.top = "10px";
+    addBtn.style.left = "10px";
 
-    addBasket.addEventListener("click", () => {
+    addBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // чтобы клик по карточке не срабатывал
         const basket = JSON.parse(localStorage.getItem("basket")) || [];
         const index = basket.findIndex(p => p.id === id);
         if (index > -1) basket[index].qty += 1;
-        else basket.push({ id, title, price, imgUrl, qty: 1 });
+        else basket.push({...product, qty: 1});
         localStorage.setItem("basket", JSON.stringify(basket));
-
-        // updateCartUI();
-
-        // Меняем иконку на "добавлено"
-        addBasket.src = "./icons/added.png";
-        addBasket.classList.add("active");
-        setTimeout(() => addBasket.classList.remove("active"), 200);
+        updateCartUI();
+        addBtn.src = "./icons/added.png";
     });
 
-    // Кнопка LearnMore (справа сверху)
-    const learMore = document.createElement("img");
-    learMore.src = "./icons/learnmore1.png";
-    learMore.alt = "Узнать больше";
-    learMore.classList.add("icon-btn");
-    learMore.style.position = "absolute";
-    learMore.style.top = "10px";
-    learMore.style.right = "10px";
+    // Learn More
+    const learnMore = document.createElement("img");
+    learnMore.src = "./icons/learnmore1.png";
+    learnMore.alt = "Узнать больше";
+    learnMore.classList.add("icon-btn");
+    learnMore.style.position = "absolute";
+    learnMore.style.top = "10px";
+    learnMore.style.right = "10px";
 
-    learMore.addEventListener("click", () => {
+    learnMore.addEventListener("click", (e) => {
+        e.stopPropagation();
         window.location.hash = `product-${id}`;
-        learMore.classList.add("active");
-        setTimeout(() => learMore.classList.remove("active"), 200);
     });
 
-    item.append(image, productTitle, productPrice, addBasket, learMore);
+    item.addEventListener("click", () => {
+        window.location.hash = `product-${id}`;
+    });
+
+    item.append(image, productTitle, productPrice, addBtn, learnMore);
     return item;
 }

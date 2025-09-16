@@ -1,54 +1,55 @@
 import { getMainTitle } from "../components/mainTitle.js";
+import { updateCartUI } from "../components/counter.js";
 
-// Пример массива всех гитар
-const products = [
-    {
-        id: "1",
-        title: "Fender Stratocaster",
-        imgUrl: "./img/farida.jpg",
-        history: "Fender Stratocaster – легендарная гитара, созданная в 1954 году...",
-        video: "https://www.youtube.com/embed/VIDEO_ID_1"
-    },
-    {
-        id: "2",
-        title: "Yamaha Keyboard",
-        imgUrl: "./img/keyboard.jpg",
-        history: "Yamaha Keyboard – профессиональная клавиатура...",
-        video: "https://www.youtube.com/embed/VIDEO_ID_2"
-    },
-    {
-        id: "3",
-        title: "Pearl Drum Set",
-        imgUrl: "./img/drum.jpg",
-        history: "Pearl Drum Set – высококачественный набор барабанов...",
-        video: "https://www.youtube.com/embed/VIDEO_ID_3"
-    }
-];
-
-export function getProductPage(id) {
-    const product = products.find(p => p.id === id);
-    if (!product) return document.createTextNode("Продукт не найден");
+export function getProductPage(product) {
+    // product = {id, title, price, imgUrl, videoUrl, description}
 
     const page = document.createElement("div");
     page.classList.add("page", "product-page", "container");
 
     const title = getMainTitle(product.title);
+    page.append(title);
+
+    const content = document.createElement("div");
+    content.classList.add("product-content");
+
+    // Картинка слева
     const img = document.createElement("img");
     img.src = product.imgUrl;
     img.alt = product.title;
     img.classList.add("product-detail-img");
 
-    const history = document.createElement("p");
-    history.classList.add("product-history");
-    history.textContent = product.history;
+    // Правая колонка с описанием и видео
+    const info = document.createElement("div");
+    info.classList.add("product-info");
 
-    const video = document.createElement("iframe");
-    video.src = product.video;
+    const desc = document.createElement("p");
+    desc.textContent = product.description;
+    desc.classList.add("product-history");
+
+    const video = document.createElement("video");
+    video.src = product.videoUrl;
+    video.controls = true;
     video.classList.add("product-video");
-    video.frameBorder = 0;
-    video.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    video.allowFullscreen = true;
 
-    page.append(title, img, history, video);
+    const addBtn = document.createElement("img");
+    addBtn.src = "./icons/add.png";
+    addBtn.alt = "Добавить в корзину";
+    addBtn.classList.add("icon-btn");
+
+    addBtn.addEventListener("click", () => {
+        const basket = JSON.parse(localStorage.getItem("basket")) || [];
+        const index = basket.findIndex(p => p.id === product.id);
+        if (index > -1) basket[index].qty += 1;
+        else basket.push({...product, qty: 1});
+        localStorage.setItem("basket", JSON.stringify(basket));
+        updateCartUI();
+        addBtn.src = "./icons/added.png"; // меняем картинку на added
+    });
+
+    info.append(desc, video);
+    content.append(img, info);
+    page.append(content);
+
     return page;
 }

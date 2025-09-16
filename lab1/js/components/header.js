@@ -1,49 +1,47 @@
-import { navigation } from "../main.js"
-
 export function getHeader() {
-    const header = document.createElement("header")
-    header.classList.add("header")
+    const header = document.createElement("header");
+    header.classList.add("header");
 
-    const container = document.createElement("div")
-    container.classList.add("container", "header_container")
+    const container = document.createElement("div");
+    container.classList.add("container");
 
-    const nav = document.createElement("nav")
-    nav.classList.add("navigation")
+    // Логотип
+    const logo = document.createElement("div");
+    logo.classList.add("logo");
+    logo.textContent = "seq0ence";
+    logo.addEventListener("click", () => {
+        window.location.hash = "";
+        navigation("");
+    });
 
-    const links = [
-        { text: "Главная страница", page: "" }
-    ]
+    // // Навигация
+    const nav = document.createElement("nav");
+    nav.classList.add("navigation");
 
-    links.forEach(linkData => {
-        const link = document.createElement("a")
-        link.href = `#${linkData.page}`
-        link.classList.add("btn")
-        link.textContent = linkData.text
+    // const homeBtn = document.createElement("a");
+    // homeBtn.href = "#";
+    // homeBtn.textContent = "Главная страница";
+    // homeBtn.classList.add("btn");
+    // homeBtn.addEventListener("click", (e) => {
+    //     e.preventDefault();
+    //     window.location.hash = "";
+    //     navigation("");
+    // });
 
-        link.addEventListener("click", (event) => {
-            event.preventDefault()
-            window.location.hash = linkData.page
-            navigation(linkData.page)
-        })
-
-        nav.append(link)
-    })
-
+    // Корзина
     const cartLink = document.createElement("a");
     cartLink.href = "#basket";
     cartLink.classList.add("cart-header");
     cartLink.innerHTML = `<img src="./icons/basket.png" alt="Корзина"><span id="cart-count">0</span>`;
-
     cartLink.addEventListener("click", (e) => {
         e.preventDefault();
         window.location.hash = "basket";
         navigation("basket");
     });
 
+    nav.append(cartLink);
+    container.append(logo, nav);
+    header.append(container);
 
-    nav.append(cartLink)
-
-    container.append(nav)
-    header.append(container)
-    return header
+    return header;
 }
