@@ -11,20 +11,17 @@ export function getHeader() {
     nav.classList.add("navigation")
 
     const links = [
-        { text: "Главная страница", page: "" },
-        { text: "Каталог", page: "catalog" },
-        { text: "Корзина", page: "basket" },
+        { text: "Главная страница", page: "" }
     ]
 
     links.forEach(linkData => {
         const link = document.createElement("a")
-        link.href = `#${linkData.page}` // ставим hash
+        link.href = `#${linkData.page}`
         link.classList.add("btn")
         link.textContent = linkData.text
 
         link.addEventListener("click", (event) => {
             event.preventDefault()
-            // обновляем hash
             window.location.hash = linkData.page
             navigation(linkData.page)
         })
@@ -32,6 +29,19 @@ export function getHeader() {
         nav.append(link)
     })
 
+    const cartLink = document.createElement("a");
+    cartLink.href = "#basket";
+    cartLink.classList.add("cart-header");
+    cartLink.innerHTML = `<img src="./icons/basket.png" alt="Корзина"><span id="cart-count">0</span>`;
+
+    cartLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.hash = "basket";
+        navigation("basket");
+    });
+
+
+    nav.append(cartLink)
 
     container.append(nav)
     header.append(container)
