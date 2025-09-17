@@ -5,6 +5,7 @@ export function getCatalogPage() {
     const title = getMainTitle("Каталог");
     const desc = document.createElement("p");
     desc.textContent = "Страница в разработке";
+    
     page.append(title, desc);
     return page;
 }

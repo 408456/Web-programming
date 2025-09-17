@@ -20,7 +20,6 @@ export function getProductCard(product) {
     productPrice.classList.add("product-list_price");
     productPrice.textContent = `${price} руб`;
 
-    // ADD кнопка
     const addBtn = document.createElement("img");
     addBtn.src = "./icons/add.png";
     addBtn.alt = "Добавить в корзину";
@@ -30,7 +29,7 @@ export function getProductCard(product) {
     addBtn.style.left = "10px";
 
     addBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // чтобы клик по карточке не срабатывал
+        e.stopPropagation();
         const basket = JSON.parse(localStorage.getItem("basket")) || [];
         const index = basket.findIndex(p => p.id === id);
         if (index > -1) basket[index].qty += 1;
@@ -40,7 +39,6 @@ export function getProductCard(product) {
         addBtn.src = "./icons/added.png";
     });
 
-    // Learn More
     const learnMore = document.createElement("img");
     learnMore.src = "./icons/learnmore1.png";
     learnMore.alt = "Узнать больше";

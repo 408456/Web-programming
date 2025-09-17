@@ -80,7 +80,6 @@ export function getBasketPage() {
 
         page.append(list, totalBlock);
 
-        // Кнопка оформления заказа
         const orderBtn = document.createElement("button");
         orderBtn.classList.add("btn");
         orderBtn.textContent = "Оформить заказ";
@@ -90,7 +89,7 @@ export function getBasketPage() {
                 alert("Корзина пуста!");
                 return;
             }
-            window.location.hash = "order"; // переход на страницу заказа
+            window.location.hash = "order"; 
         });
 
         page.append(orderBtn);
