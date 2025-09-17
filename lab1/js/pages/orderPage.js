@@ -40,10 +40,10 @@ export function getOrderPage() {
     // }
 
     localStorage.setItem("basket", JSON.stringify([]));
-    updateCartUI(); // обновляем счётчик корзины
+    updateCartUI(); 
 
     alert("Заказ создан!");
-    window.location.hash = ""; // возвращаем на главную страницу
+    window.location.hash = "";
     });
 
 

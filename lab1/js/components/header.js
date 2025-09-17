@@ -1,3 +1,4 @@
+import { navigation } from "../main.js";
 export function getHeader() {
     const header = document.createElement("header");
     header.classList.add("header");
@@ -5,7 +6,6 @@ export function getHeader() {
     const container = document.createElement("div");
     container.classList.add("container");
 
-    // Логотип
     const logo = document.createElement("div");
     logo.classList.add("logo");
     logo.textContent = "seq0ence";
@@ -14,7 +14,6 @@ export function getHeader() {
         navigation("");
     });
 
-    // // Навигация
     const nav = document.createElement("nav");
     nav.classList.add("navigation");
 
@@ -28,7 +27,6 @@ export function getHeader() {
     //     navigation("");
     // });
 
-    // Корзина
     const cartLink = document.createElement("a");
     cartLink.href = "#basket";
     cartLink.classList.add("cart-header");
