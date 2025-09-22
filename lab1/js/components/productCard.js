@@ -20,9 +20,12 @@ export function getProductCard(product) {
     productPrice.classList.add("product-list_price");
     productPrice.textContent = `${price} руб`;
 
+    const basket = JSON.parse(localStorage.getItem("basket")) || [];
+    const inCart = basket.some(p => p.id === id);
+
     // ADD кнопка
     const addBtn = document.createElement("img");
-    addBtn.src = "./icons/add.png";
+    addBtn.src = inCart ? "./icons/added.png" : "./icons/add.png";
     addBtn.alt = "Добавить в корзину";
     addBtn.classList.add("icon-btn");
     addBtn.style.position = "absolute";
@@ -33,8 +36,11 @@ export function getProductCard(product) {
         e.stopPropagation(); // чтобы клик по карточке не срабатывал
         const basket = JSON.parse(localStorage.getItem("basket")) || [];
         const index = basket.findIndex(p => p.id === id);
-        if (index > -1) basket[index].qty += 1;
-        else basket.push({...product, qty: 1});
+        if (index > -1) {
+            basket[index].qty += 1;
+        } else {
+            basket.push({...product, qty: 1});
+        }
         localStorage.setItem("basket", JSON.stringify(basket));
         updateCartUI();
         addBtn.src = "./icons/added.png";

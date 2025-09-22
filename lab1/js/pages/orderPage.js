@@ -8,36 +8,34 @@ export function getOrderPage() {
     const title = getMainTitle("Оформление заказа");
     page.append(title);
 
-    const form = document.createElement("form");
-    form.classList.add("order-form");
+    function createInput(labelText, attrs) {
+  const label = document.createElement("label");
+  label.textContent = labelText + " ";
 
-    form.innerHTML = `
-        <label>Имя 
-            <input type="text" name="firstName" required pattern="[A-Za-zА-Яа-яЁё]{2,}" title="Имя должно содержать минимум 2 буквы">
-        </label>
-        <label>Фамилия 
-            <input type="text" name="lastName" required pattern="[A-Za-zА-Яа-яЁё]{2,}" title="Фамилия должна содержать минимум 2 буквы">
-        </label>
-        <label>Email 
-            <input type="email" name="email" required>
-        </label>
-        <label>Адрес доставки 
-            <input type="text" name="address" required minlength="5">
-        </label>
-        <label>Телефон 
-            <input type="tel" name="phone" required pattern="^\\+?[0-9\\-\\s]{7,15}$" title="Введите корректный номер (7-15 цифр)">
-        </label>
-        <button type="submit" class="btn">Создать заказ</button>
-    `;
+  const input = document.createElement("input");
+  Object.entries(attrs).forEach(([key, value]) => input.setAttribute(key, value));
+
+  label.appendChild(input);
+  return label;
+}
+    const form = document.createElement("form");
+
+    form.append(
+    createInput("Имя", { type: "text", name: "firstName", required: true, pattern: "[A-Za-zА-Яа-яЁё]{2,}", title: "Имя должно содержать минимум 2 буквы" }),
+    createInput("Фамилия", { type: "text", name: "lastName", required: true, pattern: "[A-Za-zА-Яа-яЁё]{2,}", title: "Фамилия должна содержать минимум 2 буквы" }),
+    createInput("Email", { type: "email", name: "email", required: true }),
+    createInput("Адрес доставки", { type: "text", name: "address", required: true, minlength: "5" }),
+    createInput("Телефон", { type: "tel", name: "phone", required: true, pattern: "^\\+?[0-9\\-\\s]{7,15}$", title: "Введите корректный номер (7-15 цифр)" }),
+    );
+
+    const button = document.createElement("button");
+    button.type = "submit";
+    button.className = "btn";
+    button.textContent = "Создать заказ";
+    form.append(button);
 
     form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    // const basket = JSON.parse(localStorage.getItem("basket")) || [];
-    // if(basket.length === 0){
-    //     alert("Корзина пуста");
-    //     return;
-    // }
 
     localStorage.setItem("basket", JSON.stringify([]));
     updateCartUI(); // обновляем счётчик корзины

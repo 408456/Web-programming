@@ -18,16 +18,6 @@ export function getHeader() {
     const nav = document.createElement("nav");
     nav.classList.add("navigation");
 
-    // const homeBtn = document.createElement("a");
-    // homeBtn.href = "#";
-    // homeBtn.textContent = "Главная страница";
-    // homeBtn.classList.add("btn");
-    // homeBtn.addEventListener("click", (e) => {
-    //     e.preventDefault();
-    //     window.location.hash = "";
-    //     navigation("");
-    // });
-
     // Корзина
     const cartLink = document.createElement("a");
     cartLink.href = "#basket";
